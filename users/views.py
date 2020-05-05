@@ -1,13 +1,9 @@
-from .controller import UserContoller, AdminController, AdminControllerInApp
+from .controller import AdminController
 
 
-class UserViews:
+class AdminViews:
     def __init__(self):
-        self.controller = UserContoller()
         self.admin = AdminController()
-
-    def login(self):
-        pass
 
     def login_as_admin(self):
         username = input('Username: ')
@@ -16,22 +12,11 @@ class UserViews:
             return True
         return False
 
-    def signup(self):
-        username = input('Username: ')
-        password = input('Password: ')
-
-        self.admin.create_client(username=username, password=password)
-
-
-class AdminViews:
-    def __init__(self):
-        self.admin = AdminControllerInApp()
-
     def show_all_admins(self):
         self.admin.show_all_admins()
 
     def add_admin(self):
-        temp_admin = AdminControllerInApp()
+        temp_admin = AdminController()
         username = input('Username: ')
         password = input('Password: ')
         temp_admin.create_admin(username, password)
