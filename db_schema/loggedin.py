@@ -1,7 +1,7 @@
-CREATE_ADMINS = '''
-    CREATE TABLE IF NOT EXISTS admins (
+CREATE_LOGGEDIN = '''
+    CREATE TABLE IF NOT EXISTS loggedin (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL UNIQUE,
         FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
     );
 '''

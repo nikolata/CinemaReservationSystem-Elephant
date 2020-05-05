@@ -1,6 +1,7 @@
 CREATE_CLIENTS = '''
     CREATE TABLE IF NOT EXISTS clients (
-        client_id INTEGER PRIMARY KEY NOT NULL,
-        FOREIGN KEY (client_id) REFERENCES users (id) ON DELETE CASCADE
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
     );
 '''
