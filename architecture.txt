@@ -1,0 +1,35 @@
+DB:
+	users:
+		id PK NOT NULL AUTOINCREMENT,
+		username VARCHAR(30) NOT NULL UNIQUE,
+		password VARCHAR(30) NOT NULL UNIQUE,
+
+	clients:
+		client_id PK NOT NULL,
+		FOREIGN KEY (client_id) REFERENCES users (id) ON DELETE CASCADE
+	
+	admins:
+		admin_id PK NOT NULL,
+		FOREIGN KEY (admin_id) REFERENCES users (id) ON DELETE CASCADE
+
+	movies:
+		id PK NOT NULL AUTOINCREMENT,
+		name VARCHAR(50) NOT NULL,
+		rating REAL NOT NULL,
+		CONSTRAINT rating CHECK (rating >=1.0 AND rating <=10.0)'
+
+	projections:
+		id PK NOT NULL AUTOINCREMENT,
+		movie_id INTEGER NOT NULL,
+		FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
+
+	reservations:
+		id PK NOT NULL AUTOINCREMENT,
+		user_id INTEGER NOT NULL,
+		projection_id INTEGER NOT NULL,
+		row INTEGER NOT NULL,
+		cow INTEGER NOT NULL,
+		FOREIGN KEY (user_id) REFERENCES client (client_id) ON DELETE CASCADE
+		FOREIGN KEY (projection_id) REFERENCES projections(id) ON DELETE CASCADE
+
+	

@@ -1,0 +1,8 @@
+CREATE_MOVIES = '''
+    CREATE TABLE IF NOT EXISTS movies (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		name VARCHAR(50) NOT NULL,
+		rating REAL NOT NULL,
+		CHECK (rating >=1.0 AND rating <=10.0)
+    );
+'''
