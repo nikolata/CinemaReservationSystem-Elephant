@@ -31,11 +31,6 @@ class AdminController:
         settings.CURRENT_USER = curr_user
         return True
 
-
-class AdminControllerInApp:
-    def __init__(self):
-        self.admin_gateway = AdminGateway()
-
     def show_all_admins(self):
         self.admin_gateway.show_all_admins(settings.CURRENT_USER)
 

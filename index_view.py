@@ -18,6 +18,7 @@ def welcome():
         client_view.signup()
         client_view.commands()
         return
+    admin_view = AdminViews()
 
     if command == 3:
         secret_password = input('Input the secret password: ')
