@@ -10,7 +10,7 @@ from db_schema import (
     CREATE_RESERVATIONS,
     CREATE_LOGGEDIN)
 
-from index_view import welcome
+from index_view import welcome, admin_options
 
 
 class Application:
@@ -31,7 +31,10 @@ class Application:
 
     @classmethod
     def start(self):
-        welcome()
+        if welcome() is True:
+            command = None
+            while command is not 'Exit':
+                command = admin_options()
 
 
 if __name__ == '__main__':

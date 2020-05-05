@@ -8,7 +8,7 @@ class UserModel:
     def validate(name, password):
         # TODO: Validate password to be ok -> Raise an error
         return True
-    
+
     # @staticmethod
     # def login_required(func):
     #     def inner(*args, **kwargs):

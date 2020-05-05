@@ -1,6 +1,8 @@
 from users.client_view import ClientView
-from settings import ADMIN_PASSWORD
 from movies.views import ReservationView 
+from users.views import UserViews, AdminViews
+from settings import ADMIN_PASSWORD, CURRENT_USER
+
 
 def welcome():
     print('Welcome to HackCinema!')
@@ -25,3 +27,17 @@ def welcome():
             raise ValueError(f'Wrong password')
 
     raise ValueError(f'Unknown command {command}.')
+
+
+def admin_options():
+    command = int(input('Choose a command:\n1 - show all admins\n 2 - add admin\n 3 - delete admin\n4 - exit\nInput:'))
+    admin_views = AdminViews()
+    if command == 1:
+        return admin_views.show_all_admins()
+    if command == 2:
+        return admin_views.add_admin()
+    if command == 3:
+        return admin_views.delete_admin()
+    if command == 4:
+        return 'Exit'
+    raise ValueError('Error in admin_options')
