@@ -4,3 +4,4 @@ from .admins import CREATE_ADMINS
 from .movies import CREATE_MOVIES
 from .projections import CREATE_PROJECTIONS
 from .reservations import CREATE_RESERVATIONS
+from .loggedin import CREATE_LOGGEDIN

@@ -32,4 +32,21 @@ DB:
 		FOREIGN KEY (user_id) REFERENCES client (client_id) ON DELETE CASCADE
 		FOREIGN KEY (projection_id) REFERENCES projections(id) ON DELETE CASCADE
 
-	
+admin:
+	-add movie
+	-add projection
+	-delete movie
+	-delete projection
+	-add admin
+	-delete admin
+	-delete clients
+	-exit
+	-help
+
+client:
+	- show movie
+	- show movie projection <movie_id> [<date>]
+	- make reservation
+	- cancel reservation <name>
+	- exit
+	- help

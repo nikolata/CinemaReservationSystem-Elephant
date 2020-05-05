@@ -7,9 +7,10 @@ from db_schema import (
     CREATE_CLIENTS,
     CREATE_MOVIES,
     CREATE_PROJECTIONS,
-    CREATE_RESERVATIONS)
+    CREATE_RESERVATIONS,
+    CREATE_LOGGEDIN)
 
-#from index_view import welcome
+from index_view import welcome
 
 
 class Application:
@@ -22,6 +23,7 @@ class Application:
         db.cursor.execute(CREATE_MOVIES)
         db.cursor.execute(CREATE_PROJECTIONS)
         db.cursor.execute(CREATE_RESERVATIONS)
+        db.cursor.execute(CREATE_LOGGEDIN)
         # TODO: Seed with inistial data - consider using another command for this
         db.connection.commit()
         db.connection.close()
