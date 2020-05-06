@@ -9,7 +9,8 @@ class UserGateway:
         self.db = Database()
 
     def create(self, *, username, password):
-        self.model.validate(username, password)
+        if not self.model.validate(username, password):
+            return False
         password = hash_password(password)
         query = '''
             INSERT INTO users (username, password)

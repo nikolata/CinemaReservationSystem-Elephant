@@ -1,2 +1,3 @@
 DB_NAME = 'cinema.db'
 ADMIN_PASSWORD = '123456'
+CURRENT_USER = 0
