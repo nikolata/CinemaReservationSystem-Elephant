@@ -31,7 +31,21 @@ def welcome():
 
 
 def admin_options():
-    command = int(input('Choose a command:\n1 - show all admins\n 2 - add admin\n 3 - delete admin\n4 - exit\nInput:'))
+    command = int(input('''
+        Choose a command:
+        1 - show all admins
+        2 - add admin
+        3 - delete admin
+        4 - add movie
+        5 - add projection
+        6 - show all movies
+        7 - show all projections
+        8 - edit movie
+        9 - edit projection
+        10 - delete projection
+        11 - delete movie
+        100 - exit
+        Input: '''))
     admin_views = AdminViews()
     if command == 1:
         return admin_views.show_all_admins()
@@ -40,5 +54,21 @@ def admin_options():
     if command == 3:
         return admin_views.delete_admin()
     if command == 4:
+        return admin_views.add_movie()
+    if command == 5:
+        return admin_views.add_projection()
+    if command == 6:
+        return admin_views.show_all_movies()
+    if command == 7:
+        return admin_views.show_all_projections()
+    if command == 8:
+        return admin_views.edit_movie()
+    if command == 9:
+        return admin_views.edit_projection()
+    if command == 10:
+        return admin_views.delete_projection()
+    if command == 11:
+        return admin_views.delete_movie()
+    if command == 100:
         return 'Exit'
     raise ValueError('Error in admin_options')

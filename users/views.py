@@ -1,5 +1,6 @@
 from .client_controller import ClientController
 from .controller import UserContoller, AdminController, AdminControllerInApp
+from movies.views import MovieViews, ProjectionViews
 
 
 class AdminViews:
@@ -17,13 +18,44 @@ class AdminViews:
         self.admin.show_all_admins()
 
     def add_admin(self):
-        temp_admin = AdminController()
         username = input('Username: ')
         password = input('Password: ')
-        temp_admin.create_admin(username, password)
+        self.admin.create_admin(username, password)
 
     def delete_admin(self):
         print('Please, choose which admin to delete (id number)')
         self.admin.show_all_admins()
         to_be_deleted_id = input('Input: ')
         self.admin.delete_admin(to_be_deleted_id)
+
+    def add_movie(self):
+        temp_movie_admin = MovieViews()
+        temp_movie_admin.add_movie()
+
+    def edit_movie(self):
+        temp_movie_admin = MovieViews()
+        temp_movie_admin.edit_movie()
+
+    def add_projection(self):
+        temp_projection_admin = ProjectionViews()
+        temp_projection_admin.add_projection()
+
+    def edit_projection(self):
+        temp_projections_admin = ProjectionViews()
+        temp_projections_admin.edit_projection()
+
+    def show_all_movies(self):
+        temp_movie_admin = MovieViews()
+        temp_movie_admin.show_all_movies()
+
+    def show_all_projections(self):
+        temp_projections_admin = ProjectionViews()
+        temp_projections_admin.show_all_projections()
+
+    def delete_projection(self):
+        temp_projections_admin = ProjectionViews()
+        temp_projections_admin.delete_projection()
+
+    def delete_movie(self):
+        temp_movie_admin = MovieViews()
+        temp_movie_admin.delete_movie()

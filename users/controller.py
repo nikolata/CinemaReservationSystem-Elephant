@@ -40,4 +40,6 @@ class AdminController:
         self.admin_gateway.add_id_to_table(user.id)
 
     def delete_admin(self, num_id):
+        if num_id == settings.CURRENT_USER:
+            raise TypeError('YOU CANT DELETE YOURSELF')
         self.admin_gateway.delete_admin(num_id)
