@@ -31,7 +31,7 @@ class AdminController:
         return True
 
     def show_all_admins(self):
-        self.admin_gateway.show_all_admins(settings.CURRENT_USER)
+        return self.admin_gateway.show_all_admins(settings.CURRENT_USER)
 
     def create_admin(self, username, password):
         controller = UserContoller()
@@ -41,4 +41,4 @@ class AdminController:
     def delete_admin(self, num_id):
         if num_id == settings.CURRENT_USER:
             raise TypeError('YOU CANT DELETE YOURSELF')
-        self.admin_gateway.delete_admin(num_id)
+        return self.admin_gateway.delete_admin(num_id)

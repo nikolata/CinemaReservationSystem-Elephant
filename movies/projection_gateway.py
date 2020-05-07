@@ -21,8 +21,7 @@ class ProjectionGateway:
         '''
         self.db.cursor.execute(query)
         projections = self.db.cursor.fetchall()
-        for projection in projections:
-            print(f'{projection[0]} | {projection[1]} | {projection[2]} | {projection[3]} | {projection[4]}')
+        return [ProjecttionModel(*projection) for projection in projections]
 
     def edit_projection(self, projection_id):
         query = '''

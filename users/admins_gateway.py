@@ -1,5 +1,5 @@
 from db import Database
-from .models import AdminModel
+from .models import AdminModel, UserModel
 from .utls import hash_password
 
 
@@ -49,25 +49,14 @@ class AdminGateway:
         self.model.user_id = user[0][0]
         return self.model
 
-    # def delete_from_loggedin(self, current_user):
-    #     query = '''
-    #     DELETE FROM loggedin
-    #     WHERE user_id == ?
-    #     '''
-    #     print(current_user)
-    #     self.db.cursor.execute(query, (current_user,))
-    #     self.db.connection.commit()
-
     def show_all_admins(self, current_user):
         query = '''
-        SELECT user_id, username FROM admins
+        SELECT user_id, username, password FROM admins
         JOIN users ON admins.user_id = users.id
-        WHERE user_id != ?
         '''
-        self.db.cursor.execute(query, (current_user,))
+        self.db.cursor.execute(query)
         admins = self.db.cursor.fetchall()
-        for el in admins:
-            print(f'{el[0]} | {el[1]}')
+        return [UserModel(*admin) for admin in admins]
 
     def delete_admin(self, number_id):
         delete_from_admin = '''
@@ -82,3 +71,4 @@ class AdminGateway:
         self.db.cursor.execute(delete_from_users, (number_id,))
 
         self.db.connection.commit()
+        return number_id

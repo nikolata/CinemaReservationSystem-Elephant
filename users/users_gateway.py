@@ -27,8 +27,3 @@ class UserGateway:
         user_model = self.db.cursor.fetchall()
         self.model.id, self.model.name, self.model.password = user_model[0][0], user_model[0][1], user_model[0][2]
         return self.model
-
-    def all(self):
-        raw_users = self.db.cursor.execute()  # TODO: Select all users
-
-        return [self.model(**row) for row in raw_users]

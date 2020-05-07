@@ -14,7 +14,9 @@ class AdminViews:
         return False
 
     def show_all_admins(self):
-        self.admin.show_all_admins()
+        admins = self.admin.show_all_admins()
+        for admin in admins:
+            print(f'{admin.id} | {admin.name}')
 
     def add_admin(self):
         username = input('Username: ')
@@ -25,7 +27,8 @@ class AdminViews:
         print('Please, choose which admin to delete (id number)')
         self.admin.show_all_admins()
         to_be_deleted_id = input('Input: ')
-        self.admin.delete_admin(to_be_deleted_id)
+        deleted_admin = self.admin.delete_admin(to_be_deleted_id)
+        print(f'You deleted {deleted_admin}')
 
     def add_movie(self):
         temp_movie_admin = MovieViews()
