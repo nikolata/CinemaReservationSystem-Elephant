@@ -1,6 +1,5 @@
-from .client_controller import ClientController
-from .controller import UserContoller, AdminController, AdminControllerInApp
-from movies.views import MovieViews, ProjectionViews
+from .controller import AdminController
+from movies.views import MovieView, ProjectionView
 
 
 class AdminViews:
@@ -32,33 +31,33 @@ class AdminViews:
         print(f'You deleted {deleted_admin}')
 
     def add_movie(self):
-        temp_movie_admin = MovieViews()
+        temp_movie_admin = MovieView()
         temp_movie_admin.add_movie()
 
     def edit_movie(self):
-        temp_movie_admin = MovieViews()
+        temp_movie_admin = MovieView()
         temp_movie_admin.edit_movie()
 
     def add_projection(self):
-        temp_projection_admin = ProjectionViews()
+        temp_projection_admin = ProjectionView()
         temp_projection_admin.add_projection()
 
     def edit_projection(self):
-        temp_projections_admin = ProjectionViews()
+        temp_projections_admin = ProjectionView()
         temp_projections_admin.edit_projection()
 
     def show_all_movies(self):
-        temp_movie_admin = MovieViews()
+        temp_movie_admin = MovieView()
         temp_movie_admin.show_all_movies()
 
     def show_all_projections(self):
-        temp_projections_admin = ProjectionViews()
+        temp_projections_admin = ProjectionView()
         temp_projections_admin.show_all_projections()
 
     def delete_projection(self):
-        temp_projections_admin = ProjectionViews()
+        temp_projections_admin = ProjectionView()
         temp_projections_admin.delete_projection()
 
     def delete_movie(self):
-        temp_movie_admin = MovieViews()
+        temp_movie_admin = MovieView()
         temp_movie_admin.delete_movie()

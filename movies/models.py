@@ -1,12 +1,11 @@
 class MovieModel:
-<<<<<<< HEAD
-    def __init__(self, id, name, rank):
+    def __init__(self, id, name, rating):
         self.id = id
         self.name = name
-        self.rank = rank
+        self.rating = rating
 
     def __str__(self):
-        return f"[{self.id}] - {self.name} ({self.rank})"
+        return f"[{self.id}] - {self.name} ({self.rating})"
 
 
 class ProjectionModel:
@@ -20,24 +19,8 @@ class ProjectionModel:
 
 class ReservarionModel:
     def __init__(self, id, user_id, projection_id, row, col):
-        self.id = id 
+        self.id = id
         self.user_id = user_id
         self.projection_id = projection_id
         self.row = row
-        self.col = col        
-#=======
-#=======
-    def __init__(self, movie_id, name, rating):
-#>>>>>>> admin MVC changes
-        self.id = movie_id
-        self.name = name
-        self.rating = rating
-
-
-class ProjecttionModel:
-    def __init__(self, projection_id, movie_id, movie_type, date, time):
-        self.id = projection_id
-        self.movie_id = movie_id
-        self.type = movie_type
-        self.date = date
-        self.time = time
+        self.col = col

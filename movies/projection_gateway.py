@@ -1,12 +1,11 @@
 from db import instance
 from .models import ProjectionModel
-from db import Database
-
 
 
 class ProjectionGateway:
     def __init__(self):
         self.db = instance
+        self.movie = ProjectionModel
 
     def select_all_for_given_date(self, movie_id, movie_date):
         query = f'''SELECT *
@@ -25,8 +24,6 @@ class ProjectionGateway:
         self.db.cursor.execute(query)
         projections = self.db.cursor.fetchall()
         return [ProjectionModel(*data) for data in projections]
-        self.db = Database()
-        self.movie = ProjecttionModel
 
     def add_projection(self, movie_id, movie_type, date, time):
         query = '''
@@ -42,7 +39,7 @@ class ProjectionGateway:
         '''
         self.db.cursor.execute(query)
         projections = self.db.cursor.fetchall()
-        return [ProjecttionModel(*projection) for projection in projections]
+        return [ProjectionModel(*projection) for projection in projections]
 
     def edit_projection(self, projection_id):
         query = '''

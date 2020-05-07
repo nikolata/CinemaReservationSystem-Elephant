@@ -1,11 +1,11 @@
 from db import instance
-from db import Database
 from .models import MovieModel
 
 
 class MovieGateway:
     def __init__(self):
         self.db = instance
+        self.movie = MovieModel
 
     def select_all(self):
         self.db.cursor.execute('''SELECT *
@@ -19,9 +19,6 @@ class MovieGateway:
                                     WHERE id = {id}''')
         movie = self.db.cursor.fetchall()
         return MovieModel(*movie[0])
-# =======
-        self.db = Database()
-        self.movie = MovieModel
 
     def add_movie(self, name, rating):
         query = '''
@@ -31,14 +28,6 @@ class MovieGateway:
 
         self.db.cursor.execute(query, (name, rating))
         self.db.connection.commit()
-
-    def show_all_movies(self):
-        query = '''
-            SELECT * FROM movies
-        '''
-        self.db.cursor.execute(query)
-        movies = self.db.cursor.fetchall()
-        return [MovieModel(*movie) for movie in movies]
 
     def get_all_movies_id(self):
         query = '''
