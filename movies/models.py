@@ -1,4 +1,5 @@
 class MovieModel:
+<<<<<<< HEAD
     def __init__(self, id, name, rank):
         self.id = id
         self.name = name
@@ -25,15 +26,18 @@ class ReservarionModel:
         self.row = row
         self.col = col        
 #=======
-    def __init__(self, *, movie_id, name, rating):
+#=======
+    def __init__(self, movie_id, name, rating):
+#>>>>>>> admin MVC changes
         self.id = movie_id
         self.name = name
         self.rating = rating
 
 
 class ProjecttionModel:
-    def __init__(self, *, movie_id, movie_type, date, time):
-        self.id = movie_id
+    def __init__(self, projection_id, movie_id, movie_type, date, time):
+        self.id = projection_id
+        self.movie_id = movie_id
         self.type = movie_type
         self.date = date
         self.time = time

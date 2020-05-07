@@ -84,7 +84,9 @@ class MovieViews:
         self.movie.add_movie(name, rating)
 
     def show_all_movies(self):
-        self.movie.show_all_movies()
+        movies = self.movie.show_all_movies()
+        for movie in movies:
+            print(f'{movie.id} | {movie.name} | {movie.rating}')
 
     def edit_movie(self):
         movie_id = input('Movie id: ')
@@ -109,7 +111,10 @@ class ProjectionViews:
         self.projection.add_projection(int(movie_id), movie_type, date, time)
 
     def show_all_projections(self):
-        self.projection.show_all_projections()
+        projections = self.projection.show_all_projections()
+        for projection in projections:
+            print(f'{projection.id} | {projection.movie_id} | {projection.type} | {projection.date} |'
+                  f'{projection.time}')
 
     def edit_projection(self):
         projection_id = input('Projection id: ')

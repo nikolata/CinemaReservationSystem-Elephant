@@ -10,7 +10,7 @@ class MovieController:
         self.movie_gateway.add_movie(name, rating)
 
     def show_all_movies(self):
-        self.movie_gateway.show_all_movies()
+        return self.movie_gateway.show_all_movies()
 
     def get_all_movies_id(self):
         return self.movie_gateway.get_all_movies_id()
@@ -35,7 +35,7 @@ class ProjectionController:
             print('Wrong movie id!')
 
     def show_all_projections(self):
-        self.projection_gateway.show_all_projections()
+        return self.projection_gateway.show_all_projections()
 
     def edit_projection(self, projection_id):
         self.projection_gateway.edit_projection(projection_id)

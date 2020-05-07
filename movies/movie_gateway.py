@@ -38,8 +38,7 @@ class MovieGateway:
         '''
         self.db.cursor.execute(query)
         movies = self.db.cursor.fetchall()
-        for movie in movies:
-            print(f'{movie[0]} | {movie[1]} | {movie[2]}')
+        return [MovieModel(*movie) for movie in movies]
 
     def get_all_movies_id(self):
         query = '''
