@@ -1,5 +1,6 @@
 from .controllers import MovieController, ProjectionController, ReservationController
 from settings import CURRENT_USER, SPOTS_IN_ROW, SPOTS_IN_COL
+from users.client_controller import ClientController
 
 
 class MovieView:
@@ -83,18 +84,19 @@ class ReservationView:
         self.controller = ReservationController()
 
     def make_reservation(self):
-        if CURRENT_USER == 0:
+        client = ClientController()
+        if not client.is_logged():
             print("You need to be a user in the system to make reservations!")
             # ToDo client login
         else:
-            tickets = input('Step 1: Choose number of tikets: ')
+            tickets = int(input('Step 1: Choose number of tikets: '))
             movie_view = MovieView()
             movie_view.show_movies()
             movie_id = input("Step 2: Choose movie id: ")
             projection_view = ProjectionView()
             projection_view.show_projections(movie_id=movie_id, empty_spots=True)
             projection_id = input("Step 3: Choose a projection id: ")
-            hall_map = self.controller.generate_hall_places()
+            hall_map = self.controller.generate_hall_places(projection_id)
             row = " "
             for i in range(1, SPOTS_IN_COL + 1):
                 row += f" {i}"
