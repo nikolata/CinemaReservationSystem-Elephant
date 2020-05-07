@@ -7,7 +7,7 @@ class UserModel:
     @staticmethod
     def validate(name, password):
         # TODO: Validate password to be ok -> Raise an error
-        pass
+        return True
     
     # @staticmethod
     # def login_required(func):
@@ -21,4 +21,3 @@ class UserModel:
 class AdminModel:
     def __init__(self, *, admin_id):
         self.admin_id = admin_id
-

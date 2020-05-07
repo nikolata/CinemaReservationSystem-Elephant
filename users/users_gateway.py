@@ -9,7 +9,8 @@ class UserGateway:
         self.db = Database()
 
     def create(self, *, username, password):
-        self.model.validate(username, password)
+        if not self.model.validate(username, password):
+            return False
         password = hash_password(password)
         query = '''
             INSERT INTO users (username, password)
@@ -29,7 +30,8 @@ class UserGateway:
         return self.model
 
     def all(self):
-        raw_users = self.db.cursor.execute()  # TODO: Select all users
+        raw_users = self.db.cursor.execute('''SELECT *
+                                                FROM users''')  # TODO: Select all users
 
         return [self.model(**row) for row in raw_users]
 

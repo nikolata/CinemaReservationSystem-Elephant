@@ -15,6 +15,7 @@ class UserContoller:
 class AdminController:
     def __init__(self):
         self.admin_gateway = AdminGateway()
+        self.current_user = None
 
     def create_admin(self, username, password):
         controller = UserContoller()
