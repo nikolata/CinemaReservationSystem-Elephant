@@ -1,6 +1,6 @@
 import sys
 
-from db import Database
+from db import instance
 from db_schema import (
     CREATE_USERS,
     CREATE_ADMINS,
@@ -16,7 +16,7 @@ from index_view import welcome
 class Application:
     @classmethod
     def build(self):
-        db = Database()
+        db = instance
         db.cursor.execute(CREATE_USERS)
         db.cursor.execute(CREATE_CLIENTS)
         db.cursor.execute(CREATE_ADMINS)
@@ -26,8 +26,7 @@ class Application:
         db.cursor.execute(CREATE_LOGGEDIN)
         # TODO: Seed with inistial data - consider using another command for this
         db.connection.commit()
-        db.connection.close()
-
+        db.close()
         print('Done.')
 
     @classmethod
@@ -42,5 +41,7 @@ if __name__ == '__main__':
         Application.build()
     elif command == 'start':
         Application.start()
+        instance.close()
     else:
+        instance.close()
         raise ValueError(f'Unknown command {command}. Valid ones are "build" and "start"')

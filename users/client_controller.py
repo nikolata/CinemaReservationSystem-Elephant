@@ -13,10 +13,10 @@ class ClientController:
         if not user:
             return False
         self.client_gateway.add_to_table(user.id)
-        self.log_client(username, password)
+        self.login_client(username, password)
         return True
 
-    def log_client(self, username, password):
+    def login_client(self, username, password):
         CURRENT_USER = self.client_gateway.login(username, password)
 
     def is_logged(self):

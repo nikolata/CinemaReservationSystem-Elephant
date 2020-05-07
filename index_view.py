@@ -1,6 +1,6 @@
 from users.client_view import ClientView
 from settings import ADMIN_PASSWORD
-
+from movies.views import ReservationView 
 
 def welcome():
     print('Welcome to HackCinema!')
@@ -8,10 +8,14 @@ def welcome():
     client_view = ClientView()
 
     if command == 1:
-        return client_view.login()
+        client_view.login()
+        client_view.commands()
+        return
 
     if command == 2:
-        return client_view.signup()
+        client_view.signup()
+        client_view.commands()
+        return
 
     if command == 3:
         secret_password = input('Input the secret password: ')

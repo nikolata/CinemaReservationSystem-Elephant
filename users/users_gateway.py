@@ -30,7 +30,8 @@ class UserGateway:
         return self.model
 
     def all(self):
-        raw_users = self.db.cursor.execute()  # TODO: Select all users
+        raw_users = self.db.cursor.execute('''SELECT *
+                                                FROM users''')  # TODO: Select all users
 
         return [self.model(**row) for row in raw_users]
 

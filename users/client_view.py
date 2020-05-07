@@ -1,10 +1,10 @@
-from client_controller import ClientController
+from .client_controller import ClientController
 from getpass import getpass
 import re
 from movies.views import MovieView, ProjectionView, ReservationView
 
 
-class ClietView:
+class ClientView:
     def __init__(self):
         self.controller = ClientController()
         self.movie_view = MovieView()
@@ -35,8 +35,8 @@ class ClietView:
         movie_id = int(input('Enter id: '))
         if movie_id == 0:
             self.movie_view.show_movies()
+            self.command_2()
         else:
-            movie_id = int(input('Enter id: '))
             print('You can enter a date.In format: year-month-day.')
             print("If you don't want to enter date press 0")
             incorrect_date = True
