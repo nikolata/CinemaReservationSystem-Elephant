@@ -26,8 +26,10 @@ class ClientView:
             password_comfirm = getpass('Enter passoword again: ')
             if password == password_comfirm:
                 incorrect_password = False
+            else:
+                print("Comfirmation failed")
 
-        self.controller.create_client(username=username, password=password)
+        return self.controller.create_client(username=username, password=password)
 
     def command_2(self):
         print('You have to enter movie id')

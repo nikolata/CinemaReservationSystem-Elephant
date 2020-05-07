@@ -16,3 +16,9 @@ class ReservationGateway:
                                     FROM reservations
                                     WHERE projection_id = {projection_id}''')
         return self.db.cursor.fetchall()
+
+    def add_reservation(self, user_id, projection_id, row, col):
+        query = f'''INSERT INTO reservations (user_id, projection_id, row,col)
+                    VALUES(?,?,?,?)'''
+        self.db.cursor.execute(query,(user_id, projection_id, row, col))
+        self.db.connection.commit()

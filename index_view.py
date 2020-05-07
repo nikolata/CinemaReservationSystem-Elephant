@@ -13,9 +13,14 @@ def welcome():
         return
 
     if command == 2:
-        client_view.signup()
-        client_view.commands()
-        return
+        signed = False
+        while not signed:
+            if client_view.signup():
+                client_view.commands()
+                signed = True
+            else:
+                print("Passwords should be with length at least 8 symbols, 1 capital letter and a special symbol")
+        
 
     if command == 3:
         secret_password = input('Input the secret password: ')
