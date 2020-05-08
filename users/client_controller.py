@@ -1,6 +1,6 @@
 from .controller import UserContoller
 from .client_gateway import ClientGateway
-from settings import CURRENT_USER
+import settings
 
 
 class ClientController:
@@ -17,7 +17,11 @@ class ClientController:
         return True
 
     def login_client(self, username, password):
-        CURRENT_USER = self.client_gateway.login(username, password)
+        temp = self.client_gateway.login(username, password)
+        if temp is False:
+            return False
+        settings.CURRENT_USER = temp
+        return True
 
     def is_logged(self):
-        return CURRENT_USER != 0
+        return settings.CURRENT_USER != 0

@@ -1,11 +1,11 @@
 class MovieModel:
-    def __init__(self, id, name, rank):
+    def __init__(self, id, name, rating):
         self.id = id
         self.name = name
-        self.rank = rank
+        self.rating = rating
 
     def __str__(self):
-        return f"[{self.id}] - {self.name} ({self.rank})"
+        return f"[{self.id}] - {self.name} ({self.rating})"
 
 
 class ProjectionModel:
@@ -19,8 +19,8 @@ class ProjectionModel:
 
 class ReservarionModel:
     def __init__(self, id, user_id, projection_id, row, col):
-        self.id = id 
+        self.id = id
         self.user_id = user_id
         self.projection_id = projection_id
         self.row = row
-        self.col = col        
+        self.col = col

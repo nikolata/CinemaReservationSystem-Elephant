@@ -10,7 +10,7 @@ from db_schema import (
     CREATE_RESERVATIONS,
     CREATE_LOGGEDIN)
 
-from index_view import welcome
+from index_view import login_start
 
 
 class Application:
@@ -31,7 +31,7 @@ class Application:
 
     @classmethod
     def start(self):
-        welcome()
+        login_start()
 
 
 if __name__ == '__main__':
