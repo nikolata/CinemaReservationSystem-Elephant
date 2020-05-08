@@ -21,6 +21,8 @@ class AdminController:
 
     def login(self, username, password):
         admin = self.admin_gateway.login(username, password)
+        if admin is False:
+            return False
         curr_user = admin.user_id
         if curr_user == 'create_account':
             username = input('Username: ')

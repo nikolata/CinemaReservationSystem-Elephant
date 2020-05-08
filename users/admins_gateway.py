@@ -1,4 +1,4 @@
-from db import Database
+from db import instance
 from .models import AdminModel, UserModel
 from .utls import hash_password
 
@@ -6,7 +6,7 @@ from .utls import hash_password
 class AdminGateway:
     def __init__(self):
         self.model = AdminModel
-        self.db = Database()
+        self.db = instance
 
     def add_id_to_table(self, user_id):
         query = '''
@@ -35,17 +35,12 @@ class AdminGateway:
         user = self.db.cursor.fetchall()
 
         if len(user) == 0:
-            answer = input('You dont have account yet. Do you want to create one? [y/n]: ')
-            if answer == 'y':
-                return 'create_account'
-            else:
-                return 'stop_the_program'
-        # safe_to_logged_in = '''
-        #     INSERT INTO loggedin(user_id)
-        #         VALUES (?)
-        # '''
-        # self.db.cursor.execute(safe   _to_logged_in, (user[0][0],))
-        # self.db.connection.commit()
+            # answer = input('You dont have account yet. Do you want to create one? [y/n]: ')
+            # if answer == 'y':
+            #     return 'create_account'
+            # else:
+            #     return 'stop_the_program'
+            return False
         self.model.user_id = user[0][0]
         return self.model
 

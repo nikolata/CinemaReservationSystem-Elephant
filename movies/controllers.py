@@ -55,6 +55,9 @@ class ProjectionController:
     def delete_projection(self, projection_id):
         self.projection_gateway.delete_projection(projection_id)
 
+    def get_projection(self, projection_id):
+        return self.projection_gateway.select_one(projection_id)
+
 
 class ReservationController:
     def __init__(self):
@@ -73,3 +76,6 @@ class ReservationController:
     def available_seat(self, projection_id, row, col):
         taken_seats = self.gateway.get_row_and_col(projection_id)
         return not((row, col) in taken_seats)
+
+    def add_reservation(self, user_id, projection_id, row, col):
+        self.gateway.add_reservation(user_id, projection_id, row, col)

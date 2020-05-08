@@ -74,3 +74,10 @@ class ProjectionGateway:
         '''
         self.db.cursor.execute(query, (projection_id,))
         self.db.connection.commit()
+
+    def select_one(self, projection_id):
+        self.db.cursor.execute(f'''SELECT *
+                                    FROM projections
+                                    WHERE id = {projection_id}''')
+        data = self.db.cursor.fetchall()
+        return ProjectionModel(*data[0])

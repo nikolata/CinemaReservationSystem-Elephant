@@ -12,22 +12,21 @@ class ClientView:
         self.projection_view = ProjectionView()
         self.date_pattern = re.compile(r'^\d\d\d\d-\d\d-\d\d$')
 
-    def login(self):
-        username = input('Username: ')
-        password = input('Password: ')
+    def login(self, username, password):
+        return self.controller.login_client(username, password)
 
-        self.controller.login_client(username, password)
-
-    def signup(self):
-        incorrect_password = True
-        username = input('Username: ')
-        while incorrect_password:
-            password = getpass()
-            password_comfirm = getpass('Enter passoword again: ')
-            if password == password_comfirm:
-                incorrect_password = False
-
-        self.controller.create_client(username=username, password=password)
+    def signup(self, username, password, password_again):
+        # incorrect_password = True
+        # username = input('Username: ')
+        # while incorrect_password:
+        #     password = getpass()
+        #     password_comfirm = getpass('Enter passoword again: ')
+        #     if password == password_comfirm:
+        #         incorrect_password = False
+        if password == password_again:
+            return self.controller.create_client(username=username, password=password)
+        else:
+            raise ValueError('Password is not same')
 
     def command_2(self):
         print('You have to enter movie id')
@@ -52,12 +51,8 @@ class ClientView:
                     else:
                         print('Incorrect date')
 
-    def commands(self):
-        print('You can choose from: ')
-        print('1. show movies')
-        print('2. show movie projections')
-        print('3. make reservation')
-        command = int(input('Enter: '))
+
+    def commands(self, command):
         if command == 1:
             self.movie_view.show_movies()
         if command == 2:
