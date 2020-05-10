@@ -17,7 +17,7 @@ class ClientController:
         return True
 
     def login_client(self, username, password):
-        settings.CURRENT_USER = self.client_gateway.login(username, password)
-        
+        settings.CURRENT_USER = self.client_gateway.get_client_id(username, password)
+
     def is_logged(self):
         return settings.CURRENT_USER != 0

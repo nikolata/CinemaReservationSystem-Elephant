@@ -34,7 +34,7 @@ class ReservationController:
         self.gateway = ReservationGateway()
 
     def get_empty_spots(self, projection_id):
-        return (SPOTS_IN_ROW * SPOTS_IN_COL)- self.gateway.get_reservations_count(projection_id)
+        return (SPOTS_IN_ROW * SPOTS_IN_COL) - self.gateway.get_reservations_count(projection_id)
 
     def generate_hall_places(self, projection_id):
         hall = [[False for col in range(SPOTS_IN_COL)] for row in range(SPOTS_IN_ROW)]

@@ -66,3 +66,6 @@ class ClientView:
             self.command_2()
         if command == 3:
             self.reservaion_view.make_reservation()
+        else:
+            print("Not a valid command!")
+            self.commands()
