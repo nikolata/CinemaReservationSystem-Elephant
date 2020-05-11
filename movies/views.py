@@ -1,7 +1,8 @@
 from .controllers import MovieController, ProjectionController, ReservationController
-from settings import CURRENT_USER, SPOTS_IN_ROW, SPOTS_IN_COL
+from settings import SPOTS_IN_ROW, SPOTS_IN_COL
 import settings
 from users.client_controller import ClientController
+
 
 class MovieView:
     def __init__(self):
@@ -20,7 +21,7 @@ class ProjectionView:
     def __init__(self):
         self.controller = ProjectionController()
 
-    def show_projections(self, movie_id, movie_date=None, empty_spots = False):
+    def show_projections(self, movie_id, movie_date=None, empty_spots=False):
         movie_controller = MovieController()
         movie_name = movie_controller.get_name(movie_id)
         projections = self.controller.show_projection(movie_id, movie_date)
@@ -35,7 +36,7 @@ class ProjectionView:
                 for projection in projections:
                     spots = reservation_controller.get_empty_spots(projection.id)
                     print((f"[{projection.id}] - {projection.date} {projection.time} ({projection.type}) - {spots} "
-                                "spots available"))
+                           "spots available"))
             else:
                 for projection in projections:
                     print(f"[{projection.id}] - {projection.date} {projection.time} ({projection.type})")
@@ -66,7 +67,7 @@ class ReservationView:
                 row += f" {i}"
             print(row)
             hall_map = [['X' if seat else '.' for seat in row] for row in hall_map]
-            for i in range(1,SPOTS_IN_ROW + 1):
+            for i in range(1, SPOTS_IN_ROW + 1):
                 print(f"{i: <3}{' '.join(hall_map[i - 1])}")
             count = 1
             reserved_tickets = []
@@ -78,7 +79,7 @@ class ReservationView:
                     tickets -= 1
                     count += 1
                     self.controller.add_reservation(settings.CURRENT_USER, projection_id, row, col)
-                    reserved_tickets.append((int(row),int(col)))
+                    reserved_tickets.append((int(row), int(col)))
                 else:
                     print("It is taken!")
             print("This is your reservation:")
