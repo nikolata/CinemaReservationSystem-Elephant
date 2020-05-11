@@ -1,5 +1,4 @@
 from .client_controller import ClientController
-from getpass import getpass
 import re
 from movies.views import MovieView, ProjectionView, ReservationView
 
@@ -13,7 +12,7 @@ class ClientView:
         self.date_pattern = re.compile(r'^\d\d\d\d-\d\d-\d\d$')
 
     def login(self, username, password):
-        return self.controller.login_client(username, password)
+        self.controller.login_client(username, password)
 
     def signup(self, username, password, password_again):
         # incorrect_password = True
@@ -50,7 +49,6 @@ class ClientView:
                         incorrect_date = False
                     else:
                         print('Incorrect date')
-
 
     def commands(self, command):
         if command == 1:

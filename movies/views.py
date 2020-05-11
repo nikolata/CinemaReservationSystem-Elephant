@@ -37,6 +37,9 @@ class MovieView:
         movie_id = input('Movie id: ')
         self.movie.delete_movie(movie_id)
 
+    def show_name(self, movie_id):
+        print(self.controller.get_name(movie_id))
+
 
 class ProjectionView:
     def __init__(self):
@@ -57,7 +60,7 @@ class ProjectionView:
                 for projection in projections:
                     spots = reservation_controller.get_empty_spots(projection.id)
                     print((f"[{projection.id}] - {projection.date} {projection.time} ({projection.type}) - {spots} "
-                            "spots available"))
+                           "spots available"))
             else:
                 for projection in projections:
                     print(f"[{projection.id}] - {projection.date} {projection.time} ({projection.type})")
@@ -87,6 +90,9 @@ class ProjectionView:
     def delete_projection(self):
         projection_id = input('Projection id: ')
         self.projection.delete_projection(projection_id)
+
+    def show_date(self, id):
+        pass
 
 
 class ReservationView:

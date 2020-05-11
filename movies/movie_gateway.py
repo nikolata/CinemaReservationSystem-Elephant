@@ -5,11 +5,11 @@ from .models import MovieModel
 class MovieGateway:
     def __init__(self):
         self.db = instance
-        self.movie = MovieModel
 
     def select_all(self):
         self.db.cursor.execute('''SELECT *
-                                    FROM movies''')
+                                    FROM movies
+                                    ORDER BY rating''')
         movies = self.db.cursor.fetchall()
         return [MovieModel(*data) for data in movies]
 

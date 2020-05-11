@@ -5,7 +5,6 @@ from .models import ProjectionModel
 class ProjectionGateway:
     def __init__(self):
         self.db = instance
-        self.movie = ProjectionModel
 
     def select_all_for_given_date(self, movie_id, movie_date):
         query = f'''SELECT *

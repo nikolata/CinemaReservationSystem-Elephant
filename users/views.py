@@ -84,4 +84,3 @@ class AdminViews:
     def delete_movie(self):
         temp_movie_admin = MovieView()
         temp_movie_admin.delete_movie()
-
