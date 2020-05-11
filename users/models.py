@@ -24,6 +24,7 @@ class UserModel:
     #     return inner
 
 
-class AdminModel:
-    def __init__(self, *, admin_id):
+class AdminModel(UserModel):
+    def __init__(self, admin_id, user_id, name, password):
+        super().__init__(user_id, name, password)
         self.admin_id = admin_id

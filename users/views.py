@@ -10,6 +10,8 @@ class AdminViews:
     def login_as_admin(self, username, password):
         if self.admin.login(username=username, password=password) is True:
             return True
+        else:
+            print('ERROR IN LOGIN')
         return False
 
     @atomic

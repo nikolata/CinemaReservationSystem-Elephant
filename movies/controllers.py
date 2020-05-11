@@ -21,11 +21,14 @@ class MovieController:
     def get_all_movies_id(self):
         return self.movie_gateway.get_all_movies_id()
 
-    def edit_movie(self, movie_id):
-        self.movie_gateway.edit_movie(movie_id)
+    def edit_movie(self, movie_id, new_name, new_rating):
+        self.movie_gateway.edit_movie(movie_id, new_name, new_rating)
 
     def delete_movie(self, movie_id):
         self.movie_gateway.delete_movie(movie_id)
+
+    def get_movie_info(self, movie_id):
+        return self.movie_gateway.get_movie_info(movie_id)
 
 
 class ProjectionController:
@@ -43,8 +46,9 @@ class ProjectionController:
         ids = temp.get_all_movies_id()
         if movie_id in ids:
             self.projection_gateway.add_projection(movie_id, movie_type, date, time)
+            return True
         else:
-            print('Wrong movie id!')
+            return False
 
     def show_all_projections(self):
         return self.projection_gateway.show_all_projections()
