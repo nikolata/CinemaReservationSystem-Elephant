@@ -40,17 +40,7 @@ class MovieGateway:
             movies_id.append(movie[0])
         return movies_id
 
-    def edit_movie(self, movie_id):
-        query = '''
-            SELECT name, rating FROM movies
-            WHERE id == ?
-        '''
-        self.db.cursor.execute(query, (movie_id,))
-        movie = self.db.cursor.fetchall()
-        print(f'Old name {movie[0][0]}')
-        new_movie_name = input(f'New name: ')
-        print(f'Old rating {movie[0][1]}')
-        new_movie_rating = input(f'New rating: ')
+    def edit_movie(self, movie_id, new_movie_name, new_movie_rating):
         update = '''
             UPDATE movies
             SET name = ?, rating = ?
@@ -71,3 +61,12 @@ class MovieGateway:
         '''
         self.db.cursor.execute(query, (movie_id,))
         self.db.connection.commit()
+
+    def get_movie_info(self, movie_id):
+        query = '''
+            SELECT * FROM movies
+            WHERE id == ?
+        '''
+        self.db.cursor.execute(query, (movie_id,))
+        movie = self.db.cursor.fetchall()
+        return MovieModel(movie[0][0], movie[0][1], movie[0][2])

@@ -26,7 +26,12 @@ class MovieView:
 
     def edit_movie(self):
         movie_id = input('Movie id: ')
-        self.movie.edit_movie(movie_id)
+        movie = self.movie.get_movie_info(movie_id)
+        print(f'Old movie name {movie.name}')
+        new_name = input('New movie name: ')
+        print(f'Old movie rating {movie.rating}')
+        new_rating = input('New movie rating: ')
+        self.movie.edit_movie(movie_id, new_name, new_rating)
 
     def delete_movie(self):
         movie_id = input('Movie id: ')
@@ -64,7 +69,9 @@ class ProjectionView:
         movie_type = input('Movie type: ')
         date = input('Date: ')
         time = input('Time: ')
-        self.projection.add_projection(int(movie_id), movie_type, date, time)
+
+        if not self.projection.add_projection(int(movie_id), movie_type, date, time):
+            print('Wrong movie id!')
 
     def show_all_projections(self):
         projections = self.projection.show_all_projections()

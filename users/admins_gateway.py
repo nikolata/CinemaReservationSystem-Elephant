@@ -25,25 +25,6 @@ class AdminGateway:
 
         return admin_id[0][0]
 
-    def login(self, username, password):
-        query = '''
-            SELECT * FROM users
-            WHERE username == ? and password == ?
-        '''
-        password = hash_password(password)
-        self.db.cursor.execute(query, (username, password))
-        user = self.db.cursor.fetchall()
-
-        if len(user) == 0:
-            # answer = input('You dont have account yet. Do you want to create one? [y/n]: ')
-            # if answer == 'y':
-            #     return 'create_account'
-            # else:
-            #     return 'stop_the_program'
-            return False
-        self.model.user_id = user[0][0]
-        return self.model
-
     def show_all_admins(self, current_user):
         query = '''
         SELECT user_id, username, password FROM admins
@@ -67,3 +48,11 @@ class AdminGateway:
 
         self.db.connection.commit()
         return number_id
+
+    def get_admin_id(self, username, password):
+        query = '''SELECT admins.id
+                    FROM admins JOIN users ON admins.user_id = users.id
+                    WHERE username = ? AND password = ?;'''
+        self.db.cursor.execute(query, (username, hash_password(password)))
+        admin_id = self.db.cursor.fetchall()
+        return admin_id[0][0]

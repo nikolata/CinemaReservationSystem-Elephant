@@ -73,6 +73,9 @@ class LoginAsAdmin(tk.Frame):
             if admin_view.login_as_admin(self.username.get(), self.password.get()) is True:
                 master = App()
                 master.switch_frame(AdminOptions)
+            else:
+                master = App()
+                master.switch_frame(LoginPage)
         else:
             raise ValueError(f'Wrong password')
 

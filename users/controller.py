@@ -17,20 +17,12 @@ class UserContoller:
 class AdminController:
     def __init__(self):
         self.admin_gateway = AdminGateway()
-        self.current_user = None
 
     def login(self, username, password):
-        admin = self.admin_gateway.login(username, password)
-        if admin is False:
+        try:
+            settings.CURRENT_USER = self.admin_gateway.get_admin_id(username, password)
+        except Exception:
             return False
-        curr_user = admin.user_id
-        if curr_user == 'create_account':
-            username = input('Username: ')
-            password = input('Password: ')
-            self.create_admin(username, password)
-        if curr_user == 'stop_the_program':
-            return False
-        settings.CURRENT_USER = curr_user
         return True
 
     def show_all_admins(self):
@@ -39,7 +31,10 @@ class AdminController:
     def create_admin(self, username, password):
         controller = UserContoller()
         user = controller.create_user(username, password)
+        if not user:
+            return False
         self.admin_gateway.add_id_to_table(user.id)
+        self.login(username, password)
 
     def delete_admin(self, num_id):
         if num_id == settings.CURRENT_USER:
