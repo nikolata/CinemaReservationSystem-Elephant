@@ -51,7 +51,6 @@ class ClientView:
                     else:
                         print('Incorrect date')
 
-
     def commands(self, command):
         if command == 1:
             self.movie_view.show_movies()
