@@ -53,8 +53,8 @@ class ProjectionController:
     def show_all_projections(self):
         return self.projection_gateway.show_all_projections()
 
-    def edit_projection(self, projection_id):
-        self.projection_gateway.edit_projection(projection_id)
+    def edit_projection(self, projection_id, new_id, new_type, new_date, new_time):
+        self.projection_gateway.edit_projection(projection_id, new_id, new_type, new_date, new_time)
 
     def delete_projection(self, projection_id):
         self.projection_gateway.delete_projection(projection_id)

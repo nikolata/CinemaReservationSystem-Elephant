@@ -85,7 +85,11 @@ class ProjectionView:
 
     def edit_projection(self):
         projection_id = input('Projection id: ')
-        self.projection.edit_projection(projection_id)
+        new_id = input('New movie id: ')
+        new_type = input('New movie type: ')
+        new_date = input('New movie date: ')
+        new_time = input('New movie time: ')
+        self.projection.edit_projection(projection_id, new_id, new_type, new_date, new_time)
 
     def delete_projection(self):
         projection_id = input('Projection id: ')

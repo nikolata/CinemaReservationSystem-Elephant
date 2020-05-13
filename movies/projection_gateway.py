@@ -40,21 +40,13 @@ class ProjectionGateway:
         projections = self.db.cursor.fetchall()
         return [ProjectionModel(*projection) for projection in projections]
 
-    def edit_projection(self, projection_id):
+    def edit_projection(self, projection_id, new_id, new_type, new_date, new_time):
         query = '''
             SELECT movie_id, type, date, time FROM projections
             WHERE id == ?
         '''
         self.db.cursor.execute(query, (projection_id,))
         projection = self.db.cursor.fetchall()
-        print(f'Old movie id: {projection[0][0]}')
-        new_movie_id = input('New movie id: ')
-        print(f'Old movie type: {projection[0][1]}')
-        new_movie_type = input('New movie type: ')
-        print(f'Old movie date: {projection[0][2]}')
-        new_movie_date = input('New movie date: ')
-        print(f'Old movie time: {projection[0][3]}')
-        new_movie_time = input('New movie time: ')
         update = '''
         UPDATE projections
         SET movie_id = ?,
@@ -63,7 +55,7 @@ class ProjectionGateway:
             time = ?
         WHERE id == ?
         '''
-        self.db.cursor.execute(update, (new_movie_id, new_movie_type, new_movie_date, new_movie_time, projection_id))
+        self.db.cursor.execute(update, (new_id, new_type, new_date, new_time, projection_id))
         self.db.connection.commit()
 
     def delete_projection(self, projection_id):
