@@ -2,10 +2,10 @@ from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.sqlite import DATE, TIME
-import db
+from db import Base
 
 
-class MovieModel(db.Base):
+class MovieModel(Base):
     __tablename__ = "movies"
     movie_id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -15,7 +15,7 @@ class MovieModel(db.Base):
         return f"[{self.movie_id}] - {self.name} ({self.rating})"
 
 
-class ProjectionModel(db.Base):
+class ProjectionModel(Base):
     __tablename__ = "projections"
     projection_id = Column(Integer, primary_key=True)
     movie_id = Column(Integer, ForeignKey('movies.movie_id'))
@@ -25,7 +25,7 @@ class ProjectionModel(db.Base):
     movie = relationship('MovieModel')
 
 
-class ReservarionModel(db.Base):
+class ReservarionModel(Base):
     __tablename__ = 'reservations'
     reservation_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.user_id'))

@@ -2,6 +2,7 @@ import sys
 
 from db import Base, engine
 from index_view import login_start
+import movies.models
 
 
 class Application:
