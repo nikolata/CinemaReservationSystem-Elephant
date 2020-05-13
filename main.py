@@ -1,32 +1,13 @@
 import sys
 
-from db import instance
-from db_schema import (
-    CREATE_USERS,
-    CREATE_ADMINS,
-    CREATE_CLIENTS,
-    CREATE_MOVIES,
-    CREATE_PROJECTIONS,
-    CREATE_RESERVATIONS,
-    CREATE_LOGGEDIN)
-
+from db import Base, engine
 from index_view import login_start
 
 
 class Application:
     @classmethod
     def build(self):
-        db = instance
-        db.cursor.execute(CREATE_USERS)
-        db.cursor.execute(CREATE_CLIENTS)
-        db.cursor.execute(CREATE_ADMINS)
-        db.cursor.execute(CREATE_MOVIES)
-        db.cursor.execute(CREATE_PROJECTIONS)
-        db.cursor.execute(CREATE_RESERVATIONS)
-        db.cursor.execute(CREATE_LOGGEDIN)
-        # TODO: Seed with inistial data - consider using another command for this
-        db.connection.commit()
-        db.close()
+        Base.metadata.create_all(engine)
         print('Done.')
 
     @classmethod
@@ -41,7 +22,7 @@ if __name__ == '__main__':
         Application.build()
     elif command == 'start':
         Application.start()
-        instance.close()
+        # instance.close()
     else:
-        instance.close()
+        # instance.close()
         raise ValueError(f'Unknown command {command}. Valid ones are "build" and "start"')

@@ -1,4 +1,3 @@
-from db import Database
 from .client_model import ClientModel
 from .utls import hash_password
 

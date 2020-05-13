@@ -1,8 +1,20 @@
-class UserModel:
-    def __init__(self, user_id, name, password):
-        self.id = user_id
-        self.name = name
-        self.password = password
+from db import Base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
+
+# class UserModel:
+#     def __init__(self, user_id, name, password):
+#         self.id = user_id
+#         self.name = name
+#         self.password = password
+
+
+class UserModel(Base):
+    __tablename__ = 'users'
+    user_id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True)
+    password = Column(String)
 
     @staticmethod
     def validate(name, password):
@@ -24,7 +36,9 @@ class UserModel:
     #     return inner
 
 
-class AdminModel(UserModel):
-    def __init__(self, admin_id, user_id, name, password):
-        super().__init__(user_id, name, password)
-        self.admin_id = admin_id
+class AdminModel(Base):
+    __tablename__ = 'admins'
+
+    admin_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.user_id'))
+    user = relationship('UserModel')

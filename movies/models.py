@@ -1,26 +1,36 @@
-class MovieModel:
-    def __init__(self, id, name, rating):
-        self.id = id
-        self.name = name
-        self.rating = rating
+from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.sqlite import DATE, TIME
+import db
+
+
+class MovieModel(db.Base):
+    __tablename__ = "movies"
+    movie_id = Column(Integer, primary_key=True)
+    name = Column(String)
+    rating = Column(Float)
 
     def __str__(self):
-        return f"[{self.id}] - {self.name} ({self.rating})"
+        return f"[{self.movie_id}] - {self.name} ({self.rating})"
 
 
-class ProjectionModel:
-    def __init__(self, id, movie_id, type, date, time):
-        self.id = id
-        self.movie_id = movie_id
-        self.type = type
-        self.date = date
-        self.time = time
+class ProjectionModel(db.Base):
+    __tablename__ = "projections"
+    projection_id = Column(Integer, primary_key=True)
+    movie_id = Column(Integer, ForeignKey('movies.movie_id'))
+    projection_type = Column(String)
+    projection_date = Column(DATE)
+    projection_time = Column(TIME)
+    movie = relationship('MovieModel')
 
 
-class ReservarionModel:
-    def __init__(self, id, user_id, projection_id, row, col):
-        self.id = id
-        self.user_id = user_id
-        self.projection_id = projection_id
-        self.row = row
-        self.col = col
+class ReservarionModel(db.Base):
+    __tablename__ = 'reservations'
+    reservation_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.user_id'))
+    projection_id = Column(Integer, ForeignKey('projections.projection_id'))
+    row = Column(Integer)
+    col = Column(Integer)
+    user = relationship('UserModel', backref='reservations')
+    projection = relationship('ProjectionModel')

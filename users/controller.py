@@ -26,7 +26,7 @@ class AdminController:
         return True
 
     def show_all_admins(self):
-        return self.admin_gateway.show_all_admins(settings.CURRENT_USER)
+        return self.admin_gateway.show_all_admins()
 
     def create_admin(self, username, password):
         controller = UserContoller()
