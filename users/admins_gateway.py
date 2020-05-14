@@ -70,6 +70,6 @@ class AdminGateway:
     #     admin_id = self.db.cursor.fetchall()
     #     return admin_id[0][0]
 
-    def get_admin_id(self, username, password):
+    def get_admin_id(self, username):
         ad_id = session.query(AdminModel.admin_id).join(UserModel).filter(UserModel.name == username)
         return ad_id[0]

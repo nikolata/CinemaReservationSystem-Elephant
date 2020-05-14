@@ -20,7 +20,7 @@ class AdminController:
 
     def login(self, username, password):
         try:
-            settings.CURRENT_USER = self.admin_gateway.get_admin_id(username, password)
+            settings.CURRENT_USER = self.admin_gateway.get_admin_id(username)
         except Exception as exc:
             print(exc)
             return False
