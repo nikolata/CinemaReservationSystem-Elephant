@@ -4,19 +4,18 @@ from db import session
 
 
 class MovieGateway:
-    pass
-#     def __init__(self):
-#         self.db = instance
+    #     def __init__(self):
+    #         self.db = instance
 
-#     def select_all(self):
-#         self.db.cursor.execute('''SELECT *
-#                                     FROM movies
-#                                     ORDER BY rating''')
-#         movies = self.db.cursor.fetchall()
-#         return [MovieModel(*data) for data in movies]
+    #     def select_all(self):
+    #         self.db.cursor.execute('''SELECT *
+    #                                     FROM movies
+    #                                     ORDER BY rating''')
+    #         movies = self.db.cursor.fetchall()
+    #         return [MovieModel(*data) for data in movies]
 
     def select_all(self):
-        movies = session.query(MovieModel).all()
+        movies = session.query(MovieModel).order_by(MovieModel.rating).all()
         return movies
 #     def select_one(self, id):
 #         self.db.cursor.execute(f'''SELECT *
@@ -24,6 +23,9 @@ class MovieGateway:
 #                                     WHERE id = {id}''')
 #         movie = self.db.cursor.fetchall()
 #         return MovieModel(*movie[0])
+
+    def select_one(self, id):
+        return session.query(MovieModel).filter(MovieModel.movie_id == id).first()
 
 #     def add_movie(self, name, rating):
 #         query = '''
