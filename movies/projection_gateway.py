@@ -95,6 +95,7 @@ class ProjectionGateway:
     def delete_projection(self, projection_id):
         projection = session.query(ProjectionModel).filter(ProjectionModel.projection_id == projection_id).first()
         session.delete(projection)
+        session.commit()
 
 #     def select_one(self, projection_id):
 #         self.db.cursor.execute(f'''SELECT *
