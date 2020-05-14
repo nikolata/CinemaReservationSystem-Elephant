@@ -44,11 +44,11 @@ class ProjectionController:
     def add_projection(self, movie_id, movie_type, date, time):
         temp = MovieController()
         ids = temp.get_all_movies_id()
-        if movie_id in ids:
-            self.projection_gateway.add_projection(movie_id, movie_type, date, time)
-            return True
-        else:
-            return False
+        for tup_of_id in ids:
+            if movie_id in tup_of_id:
+                self.projection_gateway.add_projection(movie_id, movie_type, date, time)
+                return True
+        return False
 
     def show_all_projections(self):
         return self.projection_gateway.show_all_projections()

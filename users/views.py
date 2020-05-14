@@ -19,7 +19,7 @@ class AdminViews:
     def show_all_admins(self):
         admins = self.admin.show_all_admins()
         for admin in admins:
-            print(f'{admin.id} | {admin.name}')
+            print(f'{admin.user_id} | {admin.user.name}')
 
     @atomic
     @login_required

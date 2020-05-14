@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.sqlite import DATE, TIME
+# from sqlalchemy.dialects.sqlite import DATE, TIME
 from db import Base
 
 
@@ -20,8 +20,8 @@ class ProjectionModel(Base):
     projection_id = Column(Integer, primary_key=True)
     movie_id = Column(Integer, ForeignKey('movies.movie_id'))
     projection_type = Column(String)
-    projection_date = Column(DATE)
-    projection_time = Column(TIME)
+    projection_date = Column(String)
+    projection_time = Column(String)
     movie = relationship('MovieModel')
 
 

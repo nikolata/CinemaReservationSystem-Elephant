@@ -21,7 +21,8 @@ class AdminController:
     def login(self, username, password):
         try:
             settings.CURRENT_USER = self.admin_gateway.get_admin_id(username, password)
-        except Exception:
+        except Exception as exc:
+            print(exc)
             return False
         return True
 
@@ -33,7 +34,7 @@ class AdminController:
         user = controller.create_user(username, password)
         if not user:
             return False
-        self.admin_gateway.add_id_to_table(user.id)
+        self.admin_gateway.add_id_to_table(user.user_id)
         self.login(username, password)
 
     def delete_admin(self, num_id):

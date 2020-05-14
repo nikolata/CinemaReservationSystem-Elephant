@@ -1,5 +1,5 @@
-# from db import instance
-# from .models import ProjectionModel
+from db import session
+from .models import ProjectionModel
 
 
 class ProjectionGateway:
@@ -33,6 +33,11 @@ class ProjectionGateway:
 #         self.db.cursor.execute(query, (movie_id, movie_type, date, time))
 #         self.db.connection.commit()
 
+    def add_projection(self, movie_id, movie_type, date, time):
+        session.add(ProjectionModel(movie_id=movie_id, projection_type=movie_type, projection_date=date,
+                                    projection_time=time))
+        session.commit()
+
 #     def show_all_projections(self):
 #         query = '''
 #             SELECT * FROM projections
@@ -41,6 +46,9 @@ class ProjectionGateway:
 #         projections = self.db.cursor.fetchall()
 #         return [ProjectionModel(*projection) for projection in projections]
 
+    def show_all_projections(self):
+        projections = session.query(ProjectionModel).all()
+        return projections
 #     def edit_projection(self, projection_id, new_id, new_type, new_date, new_time):
 #         query = '''
 #             SELECT movie_id, type, date, time FROM projections
@@ -58,6 +66,14 @@ class ProjectionGateway:
 #         '''
 #         self.db.cursor.execute(update, (new_id, new_type, new_date, new_time, projection_id))
 #         self.db.connection.commit()
+
+    def edit_projection(self, projection_id, new_id, new_type, new_date, new_time):
+        session.query(ProjectionModel).filter(ProjectionModel.projection_id == projection_id).\
+            update({ProjectionModel.movie_id: new_id,
+                    ProjectionModel.projection_type: new_type,
+                    ProjectionModel.projection_date: new_date,
+                    ProjectionModel.projection_time: new_time}, synchronize_session=False)
+        session.commit()
 
 #     def delete_projection(self, projection_id):
 #         query = '''
