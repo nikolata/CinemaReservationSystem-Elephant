@@ -55,10 +55,10 @@ class AdminGateway:
     #     return number_id
 
     def delete_admin(self, number_id):
-        to_be_deleted = session.query(AdminModel).filter(AdminModel.admin_id == number_id).first()
+        to_be_deleted = session.query(AdminModel).filter(AdminModel.user_id == number_id).first()
         to_be_deleted_user = session.query(UserModel).filter(UserModel.user_id == to_be_deleted.user_id).first()
-        session.delete(to_be_deleted)
         session.delete(to_be_deleted_user)
+        session.delete(to_be_deleted)
         session.commit()
         return number_id
 
