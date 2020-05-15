@@ -23,6 +23,7 @@ class AdminGateway:
     def add_id_to_table(self, user_id):
         session.add(AdminModel(user_id=user_id))
         a_id = session.query(AdminModel.admin_id).filter(AdminModel.user_id == user_id).first()
+        session.commit()
         return a_id[0]
 
     # def show_all_admins(self, current_user):
@@ -69,6 +70,6 @@ class AdminGateway:
     #     admin_id = self.db.cursor.fetchall()
     #     return admin_id[0][0]
 
-    def get_admin_id(self, username, password):
+    def get_admin_id(self, username):
         ad_id = session.query(AdminModel.admin_id).join(UserModel).filter(UserModel.name == username)
         return ad_id[0]
