@@ -1,10 +1,11 @@
 # from db import instance
-import settings
+from db import session
 
 
 def atomic(func):
     def inner(*args, **kwargs):
         func(*args, **kwargs)
+        # session.commit()
         # query = 'BEGIN TRANSACTION;'
         # instance.cursor.execute(query)
         # try:

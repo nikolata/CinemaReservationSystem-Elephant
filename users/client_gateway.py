@@ -1,5 +1,4 @@
 from .client_model import ClientModel
-from .utls import hash_password
 from db import session
 from .models import UserModel
 
