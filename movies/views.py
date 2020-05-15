@@ -52,18 +52,19 @@ class ProjectionView:
         if movie_date:
             print(f"Projections for movie '{movie_name}' on date {movie_date}")
             for projection in projections:
-                print(f"[{projection.id}] - {projection.time} ({projection.type})")
+                print(f"[{projection.projection_id}] - {projection.projection_time} ({projection.projection_type})")
         else:
             print(f"Projections for movie '{movie_name}'")
             if empty_spots:
                 reservation_controller = ReservationController()
                 for projection in projections:
-                    spots = reservation_controller.get_empty_spots(projection.id)
-                    print((f"[{projection.id}] - {projection.date} {projection.time} ({projection.type}) - {spots} "
-                           "spots available"))
+                    spots = reservation_controller.get_empty_spots(projection.projection_id)
+                    print((f"[{projection.projection_id}] - {projection.projection_date} {projection.projection_time}"
+                           f"({projection.projection_type}) - {spots} spots available"))
             else:
                 for projection in projections:
-                    print(f"[{projection.id}] - {projection.date} {projection.time} ({projection.type})")
+                    print((f"[{projection.projection_id}] - {projection.projection_date}"
+                           f"{projection.projection_time} ({projection.projection_type})"))
 
     def add_projection(self):
         temp = MovieView()
@@ -111,10 +112,10 @@ class ReservationView:
             tickets = int(input('Step 1: Choose number of tikets: '))
             movie_view = MovieView()
             movie_view.show_movies()
-            movie_id = input("Step 2: Choose movie id: ")
+            movie_id = int(input("Step 2: Choose movie id: "))
             projection_view = ProjectionView()
             projection_view.show_projections(movie_id=movie_id, empty_spots=True)
-            projection_id = input("Step 3: Choose a projection id: ")
+            projection_id = int(input("Step 3: Choose a projection id: "))
             hall_map = self.controller.generate_hall_places(projection_id)
             row = " "
             for i in range(1, SPOTS_IN_COL + 1):
@@ -127,8 +128,8 @@ class ReservationView:
             reserved_tickets = []
             while tickets > 0:
                 print(f"Step 4: Choose seat {count}: ")
-                row = input("Choose row: ")
-                col = input("Choose col: ")
+                row = int(input("Choose row: "))
+                col = int(input("Choose col: "))
                 if self.controller.available_seat(projection_id, row, col):
                     tickets -= 1
                     count += 1
@@ -142,5 +143,6 @@ class ReservationView:
             print(f"Movie: {movie_name}")
             projection_controller = ProjectionController()
             projection = projection_controller.get_projection(projection_id)
-            print(f"Date and time: {projection.date} {projection.time} ({projection.type}) ")
+            print((f"Date and time: {projection.projection_date} {projection.projection_time}"
+                   f"({projection.projection_type}) "))
             print(f"Seats: {str(reserved_tickets).strip('[]')}")

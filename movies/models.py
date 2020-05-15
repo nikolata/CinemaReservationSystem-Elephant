@@ -25,7 +25,7 @@ class ProjectionModel(Base):
     movie = relationship('MovieModel')
 
 
-class ReservarionModel(Base):
+class ReservationModel(Base):
     __tablename__ = 'reservations'
     reservation_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.user_id'))

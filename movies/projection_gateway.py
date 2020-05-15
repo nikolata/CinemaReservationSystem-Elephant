@@ -1,20 +1,25 @@
 from db import session
 from .models import ProjectionModel
+from sqlalchemy import and_
 
 
 class ProjectionGateway:
-    pass
-#     def __init__(self):
-#         self.db = instance
+    #     def __init__(self):
+    #         self.db = instance
 
-#     def select_all_for_given_date(self, movie_id, movie_date):
-#         query = f'''SELECT *
-#                     FROM projections
-#                     WHERE date = {movie_date} AND movie_id = {movie_id}
-#                     ORDER BY time'''
-#         self.db.cursor.execute(query)
-#         projections = self.db.cursor.fetchall()
-#         return [ProjectionModel(*data) for data in projections]
+    #     def select_all_for_given_date(self, movie_id, movie_date):
+    #         query = f'''SELECT *
+    #                     FROM projections
+    #                     WHERE date = {movie_date} AND movie_id = {movie_id}
+    #                     ORDER BY time'''
+    #         self.db.cursor.execute(query)
+    #         projections = self.db.cursor.fetchall()
+    #         return [ProjectionModel(*data) for data in projections]
+
+    def select_all_for_given_date(self, movie_id, movie_date):
+        return session.query(ProjectionModel).filter(
+            and_(ProjectionModel.date == movie_date,
+                 ProjectionModel.movie_id == movie_id)).order_by(ProjectionModel.time)
 
 #     def select_all(self, movie_id):
 #         query = f'''SELECT *
@@ -24,6 +29,10 @@ class ProjectionGateway:
 #         self.db.cursor.execute(query)
 #         projections = self.db.cursor.fetchall()
 #         return [ProjectionModel(*data) for data in projections]
+
+    def select_all(self, movie_id):
+        return session.query(ProjectionModel).filter(ProjectionModel.movie_id == movie_id).\
+            order_by(ProjectionModel.projection_date).order_by(ProjectionModel.projection_time)
 
 #     def add_projection(self, movie_id, movie_type, date, time):
 #         query = '''
@@ -83,9 +92,16 @@ class ProjectionGateway:
 #         self.db.cursor.execute(query, (projection_id,))
 #         self.db.connection.commit()
 
+    def delete_projection(self, projection_id):
+        projection = session.query(ProjectionModel).filter(ProjectionModel.projection_id == projection_id).first()
+        session.delete(projection)
+
 #     def select_one(self, projection_id):
 #         self.db.cursor.execute(f'''SELECT *
 #                                     FROM projections
 #                                     WHERE id = {projection_id}''')
 #         data = self.db.cursor.fetchall()
 #         return ProjectionModel(*data[0])
+
+    def select_one(self, projection_id):
+        return session.query(ProjectionModel).filter(ProjectionModel.projection_id == projection_id).first()
