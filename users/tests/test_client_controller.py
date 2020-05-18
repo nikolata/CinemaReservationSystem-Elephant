@@ -20,16 +20,16 @@ class TestClientController(unittest.TestCase):
 
     def test_if_client_is_logged_when_created(self):
         gateway = UserGateway()
-        name = 'fa'
+        name = 'f'
         password = 'asdfghjkA@'
-        model = UserModel(1, name, password)
+        model = UserModel(user_id=1, name=name, password=password)
         gateway.create = MagicMock(return_value=model)
         c_controller = ClientController()
         c_controller.controller.users_gateway = gateway
         c_gateway = ClientGateway()
         c_controller.client_gateway = c_gateway
         c_gateway.add_to_table = MagicMock(return_value=1)
-        c_gateway.login = MagicMock(return_value=1)
+        c_gateway.get_client_id = MagicMock(return_value=(1,))
 
         self.assertTrue(c_controller.create_client(name, password))
         self.assertTrue(settings.CURRENT_USER == 1)

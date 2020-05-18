@@ -1,5 +1,5 @@
-from .users_gateway import UserGateway
-from .admins_gateway import AdminGateway
+from users.users_gateway import UserGateway
+from users.admins_gateway import AdminGateway
 import settings
 
 
